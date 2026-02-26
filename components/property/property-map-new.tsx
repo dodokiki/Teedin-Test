@@ -580,7 +580,15 @@ export default function PropertyMapNew({
   const [internalHoveredId, setInternalHoveredId] = useState<string | null>(
     null
   );
+  const [mapLoadError, setMapLoadError] = useState<string | null>(null);
   const hideTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMapApiError = useCallback((error: unknown) => {
+    const msg = error != null && typeof (error as Error).message === "string"
+      ? (error as Error).message
+      : String(error);
+    setMapLoadError(msg);
+  }, []);
 
   const handleMouseEnter = (property: PropertyData) => {
     if (hideTimer.current) {
@@ -692,6 +700,46 @@ export default function PropertyMapNew({
     );
   }
 
+  if (mapLoadError) {
+    const isAuthFailure =
+      /AuthFailure|API key|referrer|restrict/i.test(mapLoadError);
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-700 p-6 text-center max-w-lg">
+        <p className="font-medium mb-2">โหลดแผนที่ไม่สำเร็จ (API Key)</p>
+        <p className="text-sm mb-4">
+          {isAuthFailure
+            ? "API Key ถูกปฏิเสธโดย Google (AuthFailure). กรุณาตรวจสอบใน Google Cloud Console:"
+            : "เกิดข้อผิดพลาดในการโหลดแผนที่"}
+        </p>
+        {isAuthFailure && (
+          <ul className="text-left text-sm list-disc list-inside space-y-1 mb-4">
+            <li>เปิดใช้ <strong>Maps JavaScript API</strong> และ <strong>Map Tiles API</strong></li>
+            <li>เปิดบilling (เชื่อมบัตรเครดิต) ในโปรเจกต์</li>
+            <li>ถ้าตั้งการจำกัด Key (HTTP referrers): เพิ่มโดเมน เช่น <code className="bg-gray-200 px-1 rounded">https://teedin-test.vercel.app/*</code> และ <code className="bg-gray-200 px-1 rounded">http://localhost:3000/*</code></li>
+            <li>
+              <a
+                href="https://console.cloud.google.com/apis/credentials"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline"
+              >
+                ไปที่ Credentials ใน Google Cloud Console
+              </a>
+            </li>
+          </ul>
+        )}
+        <p className="text-xs text-gray-500 mb-2">หลังจากแก้ไขใน Google Cloud แล้ว ให้รีเฟรชหน้านี้</p>
+        <button
+          type="button"
+          onClick={() => setMapLoadError(null)}
+          className="text-sm px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          ลองอีกครั้ง
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={rootRef}
@@ -711,7 +759,7 @@ export default function PropertyMapNew({
           display: none !important; /* Hide the default google maps tail */
         }
       `}</style>
-      <APIProvider apiKey={googleMapsApiKey}>
+      <APIProvider apiKey={googleMapsApiKey} onError={handleMapApiError}>
         <GoogleMap
           mapId={mapId}
           defaultCenter={initialCenter}
