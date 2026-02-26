@@ -14,7 +14,8 @@
     "check:omise-env": "node scripts/check-omise-env.js",
     "check:omise-env:prod": "node scripts/check-omise-env.js --production",
     "ngrok:url": "node scripts/get-ngrok-url.js",
-    "simulate:omise-webhook": "node scripts/simulate-omise-webhook.js"
+    "simulate:omise-webhook": "node scripts/simulate-omise-webhook.js",
+    "test:smoke": "node scripts/teedin-smoke-test.mjs"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.10",

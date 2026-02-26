@@ -1,0 +1,139 @@
+{
+  "generatedAt": "2026-02-26T08:53:08.333Z",
+  "baseUrl": "http://localhost:3000",
+  "summary": {
+    "pass": 30,
+    "fail": 0,
+    "skip": 0
+  },
+  "results": {
+    "customer": [
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      }
+    ],
+    "agent": [
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      }
+    ],
+    "admin": [
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      }
+    ],
+    "super_admin": [
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      },
+      {
+        "result": "pass",
+        "note": "HTTP 200"
+      }
+    ]
+  }
+}
