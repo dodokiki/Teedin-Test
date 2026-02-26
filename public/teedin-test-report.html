@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teedin Browser Test Report — Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --pass: #22c55e;
+      --fail: #ef4444;
+      --skip: #64748b;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* Part Tester */
+    .tester-section {
+      background: linear-gradient(135deg, var(--card) 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tester-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+    }
+    .tester-section h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tester-section .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .tester-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .tester-item {
+      background: rgba(255,255,255,0.05);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .tester-item strong { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .tester-item span { display: block; margin-top: 4px; }
+
+    .load-json-area {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px dashed var(--accent);
+      border-radius: 12px;
+    }
+    .load-json-area label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--accent); font-weight: 500; }
+    .load-json-area input[type="file"] { display: none; }
+    .load-json-area .hint { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+
+    /* Summary cards */
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .summary-card.pass { border-color: var(--pass); background: rgba(34, 197, 94, 0.08); }
+    .summary-card.fail { border-color: var(--fail); background: rgba(239, 68, 68, 0.08); }
+    .summary-card.skip { border-color: var(--skip); background: rgba(100, 116, 139, 0.08); }
+    .summary-card .num { font-size: 2rem; font-weight: 800; }
+    .summary-card.pass .num { color: var(--pass); }
+    .summary-card.fail .num { color: var(--fail); }
+    .summary-card.skip .num { color: var(--skip); }
+    .summary-card .label { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+
+    /* Role sections */
+    .role-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .role-header {
+      padding: 16px 24px;
+      background: var(--accent-soft);
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .role-header .badge {
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .result { font-weight: 600; }
+    .result.pass { color: var(--pass); }
+    .result.fail { color: var(--fail); }
+    .result.skip { color: var(--skip); }
+    .note { color: var(--muted); font-size: 0.9rem; }
+
+    /* Checklist */
+    .checklist-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .checklist-section h2 {
+      margin: 0 0 16px 0;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .checklist-section ul { margin: 0; padding-left: 20px; }
+    .checklist-section li { margin-bottom: 8px; color: var(--muted); }
+    .checklist-section li.done { color: var(--pass); }
+
+    /* Errors & Notes */
+    .errors-section, .notes-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .errors-section h2 { color: var(--fail); }
+    .errors-section pre, .notes-section textarea {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      color: var(--text);
+      font-size: 0.85rem;
+      width: 100%;
+      min-height: 80px;
+      font-family: inherit;
+    }
+    .notes-section textarea { resize: vertical; }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Part Tester -->
+    <section class="tester-section" aria-label="Part Tester">
+      <h1>Part Tester</h1>
+      <p class="sub">ผู้ดำเนินการทดสอบและสภาพแวดล้อม</p>
+      <div class="tester-grid">
+        <div class="tester-item">
+          <strong>Tester</strong>
+          <span>Cursor (cursor-ide-browser)</span>
+        </div>
+        <div class="tester-item">
+          <strong>วันที่ทดสอบ</strong>
+          <span id="report-date">—</span>
+        </div>
+        <div class="tester-item">
+          <strong>Environment</strong>
+          <span>http://localhost:3000</span>
+        </div>
+        <div class="tester-item">
+          <strong>คู่มืออ้างอิง</strong>
+          <span>docs/CURSOR-BROWSER-TESTING-GUIDE.md</span>
+        </div>
+      </div>
+      <div class="load-json-area">
+        <label>
+          <input type="file" id="results-file" accept=".json" />
+          📂 โหลดผลจากไฟล์ JSON
+        </label>
+        <p class="hint">หลังรัน <code>npm run test:smoke</code> ผลจะถูกฝังในหน้านี้ — เปิดไฟล์นี้ใหม่ผลจะโหลดอัตโนมัติ หรือเลือกไฟล์ JSON ด้านบนเพื่อนำผลเข้าเอง</p>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <h2 style="margin-bottom:16px; font-size:1.25rem;">สรุปผลการทดสอบ</h2>
+    <div class="summary">
+      <div class="summary-card pass">
+        <div class="num" id="count-pass">0</div>
+        <div class="label">ผ่าน</div>
+      </div>
+      <div class="summary-card fail">
+        <div class="num" id="count-fail">0</div>
+        <div class="label">ไม่ผ่าน</div>
+      </div>
+      <div class="summary-card skip">
+        <div class="num" id="count-skip">0</div>
+        <div class="label">ไม่ได้ทดสอบ</div>
+      </div>
+    </div>
+
+    <!-- Customer -->
+    <section class="role-section">
+      <div class="role-header"><span class="badge">Customer</span> Workflows</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Workflow / หน้า</th>
+            <th>ผล</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody data-role="customer">
+          <tr data-row="0"><td>1</td><td>ดูหน้าหลัก /</td><td class="result skip" data-result="skip">—</td><td class="note">โหลดได้, Hero, ปุ่ม Agent/ลงประกาศ</td></tr>
+          <tr data-row="1"><td>2</td><td>Login / Register</td><td class="result skip" data-result="skip">—</td><td class="note">Login/Register สำเร็จ, redirect ถูก</td></tr>
+          <tr data-row="2"><td>3</td><td>Dashboard → /dashboard/account</td><td class="result skip" data-result="skip">—</td><td class="note">redirect ไป account, แก้ไขโปรไฟล์ได้</td></tr>
+          <tr data-row="3"><td>4</td><td>รายการโปรด /dashboard/favorites</td><td class="result skip" data-result="skip">—</td><td class="note">ดูรายการ, ลบรายการโปรด</td></tr>
+          <tr data-row="4"><td>5</td><td>เปรียบเทียบ /dashboard/compare</td><td class="result skip" data-result="skip">—</td><td class="note">เพิ่ม/ลบรายการเปรียบเทียบ</td></tr>
+          <tr data-row="5"><td>6</td><td>แพ็กเกจ /dashboard/packages</td><td class="result skip" data-result="skip">—</td><td class="note">ดูแพ็กเกจ</td></tr>
+          <tr data-row="6"><td>7</td><td>การแจ้งเตือน /dashboard/notifications</td><td class="result skip" data-result="skip">—</td><td class="note">ดูรายการแจ้งเตือน</td></tr>
+          <tr data-row="7"><td>8</td><td>รายการประกาศทั้งหมด /all-properties</td><td class="result skip" data-result="skip">—</td><td class="note">โหลดได้, filter/search</td></tr>
+          <tr data-row="8"><td>9</td><td>หน้ารายละเอียดประกาศ /property/[id]</td><td class="result skip" data-result="skip">—</td><td class="note">แสดงข้อมูล Agent, ปุ่มติดต่อ/ซ่อนเบอร์</td></tr>
+          <tr data-row="9"><td>10</td><td>แผนที่ /map</td><td class="result skip" data-result="skip">—</td><td class="note">แผนที่โหลด, ค้นหา/ฟิลเตอร์</td></tr>
+          <tr data-row="10"><td>11</td><td>ลงประกาศ (Customer) /add-property</td><td class="result skip" data-result="skip">—</td><td class="note">RoleSwitchAlert หรือ redirect สมัคร Agent</td></tr>
+          <tr data-row="11"><td>12</td><td>Coming Soon /coming-soon</td><td class="result skip" data-result="skip">—</td><td class="note">หน้าโหลดได้, ปุ่มกลับ/ไป dashboard</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Agent -->
+    <section class="role-section">
+      <div class="role-header"><span class="badge">Agent</span> Workflows</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Workflow / หน้า</th>
+            <th>ผล</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody data-role="agent">
+          <tr data-row="0"><td>1</td><td>Dashboard → /dashboard/agent</td><td class="result skip" data-result="skip">—</td><td class="note">redirect ไป agent dashboard</td></tr>
+          <tr data-row="1"><td>2</td><td>ลงประกาศ /add-property</td><td class="result skip" data-result="skip">—</td><td class="note">ฟอร์ม, อัพโหลดรูป, บันทึก/ส่ง</td></tr>
+          <tr data-row="2"><td>3</td><td>รายการประกาศของฉัน /dashboard/listings</td><td class="result skip" data-result="skip">—</td><td class="note">ดูรายการ, แก้ไข, ลบ, สถานะ</td></tr>
+          <tr data-row="3"><td>4</td><td>หน้ารายละเอียดประกาศ (ของตัวเอง)</td><td class="result skip" data-result="skip">—</td><td class="note">แก้ไขได้, สถิติ/ลูกค้าสนใจ</td></tr>
+          <tr data-row="4"><td>5</td><td>ติดต่อลูกค้า (ซ่อนเบอร์)</td><td class="result skip" data-result="skip">—</td><td class="note">ปุ่มขอเบอร์/แสดงเบอร์</td></tr>
+          <tr data-row="5"><td>6</td><td>Add Property Header</td><td class="result skip" data-result="skip">—</td><td class="note">ปุ่ม "ไป Dashboard Agent"</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Admin -->
+    <section class="role-section">
+      <div class="role-header"><span class="badge">Admin</span> Workflows</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Workflow / หน้า</th>
+            <th>ผล</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody data-role="admin">
+          <tr data-row="0"><td>1</td><td>เข้า Dashboard /dashboard</td><td class="result skip" data-result="skip">—</td><td class="note">เห็นปุ่มเปิด Super Admin ในหน้าต่างใหม่</td></tr>
+          <tr data-row="1"><td>2</td><td>เปิด Super Admin → /super-admin-login</td><td class="result skip" data-result="skip">—</td><td class="note">เปิดแท็บใหม่ไปหน้า login</td></tr>
+          <tr data-row="2"><td>3</td><td>จัดการบัญชี /dashboard/account</td><td class="result skip" data-result="skip">—</td><td class="note">แก้ไขโปรไฟล์ได้</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Super Admin -->
+    <section class="role-section">
+      <div class="role-header"><span class="badge">Super Admin</span> Workflows</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Workflow / หน้า</th>
+            <th>ผล</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody data-role="super_admin">
+          <tr data-row="0"><td>1</td><td>Login Super Admin /super-admin-login</td><td class="result skip" data-result="skip">—</td><td class="note">Login ได้, redirect ไป /super-admin-page</td></tr>
+          <tr data-row="1"><td>2</td><td>Dashboard tab=dashboard</td><td class="result skip" data-result="skip">—</td><td class="note">สถิติ, กราฟ, ตารางประกาศล่าสุด</td></tr>
+          <tr data-row="2"><td>3</td><td>จัดการผู้ใช้ tab=users</td><td class="result skip" data-result="skip">—</td><td class="note">ดู user, role, ค้นหา</td></tr>
+          <tr data-row="3"><td>4</td><td>จัดการประกาศ tab=properties</td><td class="result skip" data-result="skip">—</td><td class="note">ดูรายการ, สถานะ, pagination</td></tr>
+          <tr data-row="4"><td>5</td><td>รออนุมัติ tab=pending-properties</td><td class="result skip" data-result="skip">—</td><td class="note">อนุมัติ/ปฏิเสธ, Draw Boundary</td></tr>
+          <tr data-row="5"><td>6</td><td>แจ้งเตือน tab=notifications</td><td class="result skip" data-result="skip">—</td><td class="note">ดูการแจ้งเตือน</td></tr>
+          <tr data-row="6"><td>7</td><td>ตั้งค่า tab=settings</td><td class="result skip" data-result="skip">—</td><td class="note">ตั้งค่าระบบ/โปรไฟล์แอดมิน</td></tr>
+          <tr data-row="7"><td>8</td><td>ออกจากระบบ (Logout)</td><td class="result skip" data-result="skip">—</td><td class="note">redirect ไป /super-admin-login</td></tr>
+          <tr data-row="8"><td>9</td><td>Session / Security (Idle)</td><td class="result skip" data-result="skip">—</td><td class="note">แจ้งเตือนเมื่อ idle, logout อัตโนมัติ</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Checklist ระบบควรเทสอะไรบ้าง -->
+    <h2 style="margin-bottom:16px; font-size:1.25rem;">Checklist — ระบบควรเทสอะไรบ้าง</h2>
+    <div class="checklist-section">
+      <h2>4.1 การเข้าใช้งานและสิทธิ์</h2>
+      <ul>
+        <li class="checklist-item">แต่ละ Role login ได้และถูก redirect ไปหน้าที่ถูกต้อง</li>
+        <li class="checklist-item">Customer ไม่เห็นเมนู/ปุ่มของ Agent หรือ Super Admin ที่ไม่ควรเข้า</li>
+        <li class="checklist-item">Agent เข้า /add-property และ /dashboard/listings ได้</li>
+        <li class="checklist-item">Super Admin เข้าได้เฉพาะหลัง login ที่ /super-admin-login เท่านั้น</li>
+        <li class="checklist-item">การเข้า URL โดยตรงโดยไม่มีสิทธิ์ ถูก redirect ไป login หรือหน้าเหมาะสม</li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <h2>4.2 หน้าที่สำคัญ (Smoke Test)</h2>
+      <ul>
+        <li class="checklist-item">หน้าหลัก / โหลดได้</li>
+        <li class="checklist-item">/all-properties โหลดและแสดงรายการ (หรือ empty state)</li>
+        <li class="checklist-item">/property/[id] โหลดและแสดงรายละเอียด</li>
+        <li class="checklist-item">/add-property โหลด (Agent ใช้ได้เต็มที่)</li>
+        <li class="checklist-item">/dashboard redirect ตาม role</li>
+        <li class="checklist-item">/dashboard/account, favorites, compare, notifications โหลดได้</li>
+        <li class="checklist-item">/dashboard/agent, /dashboard/listings โหลดได้เมื่อเป็น Agent</li>
+        <li class="checklist-item">/super-admin-login และ /super-admin-page โหลดได้หลัง login Super Admin</li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <h2>4.3 ฟอร์มและปุ่มหลัก</h2>
+      <ul>
+        <li class="checklist-item">Login / Register ทำงาน</li>
+        <li class="checklist-item">ฟอร์มลงประกาศ (add-property): บันทึก/ส่งได้ ไม่ crash</li>
+        <li class="checklist-item">ปุ่มติดต่อ/ซ่อนเบอร์ในหน้ารายละเอียดประกาศ</li>
+        <li class="checklist-item">ปุ่ม Export / CSV ใน Super Admin</li>
+        <li class="checklist-item">ปุ่มอนุมัติ/ปฏิเสธใน pending-properties</li>
+        <li class="checklist-item">Logout ทุก role ทำงานและ redirect ถูก</li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <h2>4.4 UI / UX พื้นฐาน</h2>
+      <ul>
+        <li class="checklist-item">ไม่มี error แดงบนหน้า (console error ที่ทำให้ฟีเจอร์เสีย)</li>
+        <li class="checklist-item">Mobile/Responsive: เมนูเปิดปิดได้, ฟอร์มใช้ได้</li>
+        <li class="checklist-item">ภาษา: ไทย/EN สลับได้และไม่แตก</li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <h2>4.5 Performance</h2>
+      <ul>
+        <li class="checklist-item">หน้าแรกและหน้ารายการโหลดในเวลาที่ยอมรับได้</li>
+        <li class="checklist-item">แผนที่ (/map) โหลดและไม่ค้าง</li>
+      </ul>
+    </div>
+
+    <!-- Console Errors -->
+    <section class="errors-section">
+      <h2>ข้อผิดพลาด / Console Errors</h2>
+      <pre id="console-errors">(เมื่อรันเทสด้วย Cursor Browser MCP แล้ว ให้บันทึก error ที่เห็นจาก console ไว้ส่วนนี้)</pre>
+    </section>
+
+    <!-- ข้อเสนอแนะ -->
+    <section class="notes-section">
+      <h2>ข้อเสนอแนะ</h2>
+      <textarea id="suggestions" rows="4" placeholder="สรุปข้อเสนอแนะจากการทดสอบ..."></textarea>
+    </section>
+
+    <footer>
+      Teedin Browser Test Report — ตาม docs/CURSOR-BROWSER-TESTING-GUIDE.md · Part Tester: Cursor (cursor-ide-browser)
+    </footer>
+  </div>
+
+  <script id="teedin-results-payload" type="application/json">{"generatedAt":"2026-02-26T08:53:08.333Z","baseUrl":"http://localhost:3000","summary":{"pass":30,"fail":0,"skip":0},"results":{"customer":[{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"}],"agent":[{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"}],"admin":[{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"}],"super_admin":[{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"},{"result":"pass","note":"HTTP 200"}]}}</script>
+  <script>
+    // ตั้งวันที่ใน Part Tester
+    document.getElementById('report-date').textContent = new Date().toLocaleDateString('th-TH', {
+      year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+
+    // นำผลจาก data (JSON) ไปใส่ในตาราง
+    function applyResults(data) {
+      var results = data.results || {};
+      var roles = ['customer', 'agent', 'admin', 'super_admin'];
+      roles.forEach(function(role) {
+        var rows = (results[role] || []);
+        var tbody = document.querySelector('tbody[data-role="' + role + '"]');
+        if (!tbody) return;
+        tbody.querySelectorAll('tr[data-row]').forEach(function(tr) {
+          var rowIndex = parseInt(tr.getAttribute('data-row'), 10);
+          var item = rows[rowIndex];
+          if (!item) return;
+          var result = (item.result || 'skip').toLowerCase();
+          if (result !== 'pass' && result !== 'fail') result = 'skip';
+          var cell = tr.querySelector('td.result');
+          var noteCell = tr.querySelector('td.note');
+          if (cell) {
+            cell.setAttribute('data-result', result);
+            cell.textContent = result === 'pass' ? '✅ ผ่าน' : result === 'fail' ? '❌ ไม่ผ่าน' : '—';
+            cell.className = 'result ' + result;
+          }
+          if (noteCell && item.note) noteCell.textContent = item.note;
+        });
+      });
+      updateSummary();
+      if (data.generatedAt) {
+        var d = new Date(data.generatedAt);
+        document.getElementById('report-date').textContent = d.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) + ' (โหลดอัตโนมัติ)';
+      }
+    }
+
+    // โหลดผลอัตโนมัติจากข้อมูลที่ฝังในหน้า (อัปเดตโดย npm run test:smoke)
+    (function tryAutoLoad() {
+      var el = document.getElementById('teedin-results-payload');
+      if (!el || !el.textContent) return;
+      try {
+        var data = JSON.parse(el.textContent);
+        if (data.results && Object.keys(data.results).length > 0) {
+          applyResults(data);
+        }
+      } catch (_) {}
+    })();
+
+    // นับผลจากแถวที่มี data-result
+    function updateSummary() {
+      var cells = document.querySelectorAll('td.result[data-result]');
+      var pass = 0, fail = 0, skip = 0;
+      cells.forEach(function(cell) {
+        var r = (cell.getAttribute('data-result') || '').toLowerCase();
+        if (r === 'pass') pass++;
+        else if (r === 'fail') fail++;
+        else skip++;
+      });
+      document.getElementById('count-pass').textContent = pass;
+      document.getElementById('count-fail').textContent = fail;
+      document.getElementById('count-skip').textContent = skip;
+    }
+    updateSummary();
+
+    // คลิกที่เซลล์ผลเพื่อสลับ pass/fail/skip (สำหรับกรอกผลด้วยมือ)
+    document.querySelectorAll('td.result[data-result]').forEach(function(cell) {
+      cell.style.cursor = 'pointer';
+      cell.title = 'คลิกเพื่อสลับ: skip → pass → fail → skip';
+      cell.addEventListener('click', function() {
+        var r = (this.getAttribute('data-result') || 'skip').toLowerCase();
+        var next = r === 'skip' ? 'pass' : r === 'pass' ? 'fail' : 'skip';
+        this.setAttribute('data-result', next);
+        this.textContent = next === 'pass' ? '✅ ผ่าน' : next === 'fail' ? '❌ ไม่ผ่าน' : '—';
+        this.className = 'result ' + next;
+        updateSummary();
+      });
+    });
+
+    // คลิก checklist เพื่อทำเครื่องหมาย done
+    document.querySelectorAll('.checklist-item').forEach(function(li) {
+      li.style.cursor = 'pointer';
+      li.addEventListener('click', function() { this.classList.toggle('done'); });
+    });
+
+    // โหลดผลจากไฟล์ JSON (ถ้าต้องการเลือกไฟล์เอง)
+    document.getElementById('results-file').addEventListener('change', function(e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function() {
+        try {
+          var data = JSON.parse(reader.result);
+          applyResults(data);
+          e.target.value = '';
+        } catch (err) {
+          alert('อ่านไฟล์ JSON ไม่ได้: ' + err.message);
+        }
+      };
+      reader.readAsText(file, 'UTF-8');
+    });
+  </script>
+</body>
+</html>
