@@ -1,0 +1,23 @@
+{
+  "name": "TEEDIN EASY",
+  "short_name": "TEEDIN",
+  "description": "Real Estate Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#006CE3",
+  "icons": [
+    {
+      "src": "/thai-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/thai-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+

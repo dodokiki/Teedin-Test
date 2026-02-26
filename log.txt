@@ -1,0 +1,155 @@
+[2025-10-25 02:02:47] Commit: แก้ช้สาและไฟล์ที่ไม่จำเป็น
+[2025-10-25 06:03:31] Commit: Login Line
+[2025-10-25 07:24:17] Commit: เเก้ไข Line
+[2025-10-25 10:52:55] Commit: แก้ความเร็ว
+[2025-10-25 11:43:42] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-10-25 18:42:42] Commit: แก้ล้อกอิิน
+[2025-10-25 18:50:44] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-10-25 19:00:32] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-10-25 19:34:05] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-10-26 01:18:52] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-10-26 15:00:03] Commit: CRUD ประกาศ และ ปุ่ม Mark as Sold/Rented
+[2025-10-31 15:44:01] Commit: จำกัดในการส่ง OTP
+[2025-10-31 15:54:59] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-01 03:42:30] Commit: แก้ header-add-property
+[2025-11-01 08:14:26] Commit: แก้ไขหน้าประกาศของฉัน และ property-card
+[2025-11-01 08:46:32] Commit: การ์ดหมดอายุใน30วัน Auto-hide หลังหมดอายุ
+[2025-11-01 09:27:46] Commit: แจ้งเตือนเมื่อมี Buyer ดูเบอร์โทร
+[2025-11-01 09:48:08] Commit: ทำให้ประกาศโปรโมทเด่นบนแผนที่
+[2025-11-02 18:20:07] Commit: Responsive Design ยังไม่ครบทุกหน้า
+[2025-11-07 04:49:35] Commit: fix: resolve merge conflicts in listings and property-card
+[2025-11-07 04:50:30] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-07 10:36:18] Commit: Responsive ฉบับสมบูรณ์
+[2025-11-07 14:14:34] Commit: แปลภาษา ai ยังไม่สมบูร
+[2025-11-07 14:36:45] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-07 16:32:27] Commit: Layout หน้าหลักบนมือถือ
+[2025-11-07 18:09:16] Commit: 8/11/2568-1
+[2025-11-08 06:06:14] Commit: all-properties
+[2025-11-08 11:21:53] Commit: Merge revert commit 19d9857
+[2025-11-08 15:33:16] Commit: ทำให้รูแขึ้นเเละท็อปบาร์ขึ้นกับกรอบ
+[2025-11-08 15:34:24] Commit: update นิดหน่อย
+[2025-11-08 15:57:24] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-08 18:53:10] Commit: อัเดจ
+[2025-11-08 21:59:58] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-09 07:43:28] Commit: เเก้ Login
+
+ให้สามรถ Login ด้วยเบอร์โทรในกล่องอีเมลในหน้า Login Page ได้เเละให้สามารถยืนยัน OTP สำหรับกรณีคน Login ด้วยเบอร์โทร เเละลบฟังชั่นเเละปุ่ม Login ด้วยเบอร์โทรเเละ เฟสบุ๊คออก
+[2025-11-10 13:44:31] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-10 14:20:15] Commit: แก้ล็อกอิน 90 %
+[2025-11-10 14:53:12] Commit: เเก้ การสมัครให้สมบูรณ์มากขึ้น
+
+-เเก้การส่ง OTP ในการณีคนมีบัญชีอยู่ เช่นกดสมัครเเล้วจะต้องไม่ขึ้น OTP สำหรับคนมีที่บัญชีอยู่เเล้ว
+-เเก้การรีเฟสหลังจากกรอก OTP สมัคร 2 ครั้ง
+[2025-11-10 15:05:15] Commit: เเก้ สมัคร
+
+เปลี่ยนจากหลังสมัครไปหน้าเเดชบอดเปลี่ยนเป็น ไปหน้า Home Page เเทน
+[2025-11-10 15:54:01] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-10 16:03:47] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-12 21:43:47] Commit: แก้ แดชบอรืดเกี่ยวกับ เวลาไม่มีข้อมูลให้แสดงว่าไม่มีข้อมูล
+[2025-11-12 22:28:55] Commit: superadmin แก้เข้าไปใช้งาน
+[2025-11-13 08:16:02] Commit: ปรับแก้ไขขนาดของการ์ให้เท่ากันในหน้าหลัก
+[2025-11-13 08:21:15] Commit: ขนาดการ์ดในหน้าประกาศของฉัน
+[2025-11-13 09:02:08] Commit: หน้าบัญชีของฉัน
+[2025-11-13 16:23:30] Commit: ทำให้หายเบลอเเละเเก้ตรงประเภทให้ขึ้น เช่า ขาย
+[2025-11-13 17:55:28] Commit: login line
+[2025-11-14 08:23:00] Commit: เเก้ Login One Way Login
+[2025-11-14 10:16:39] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-15 05:28:10] Commit: ปรับขนาดการ์ดทุกหน้า และ refactor code
+
+refactor code หน้า property-card , property-section
+[2025-11-15 05:38:49] Commit: ปรับการ์ดหน้าถูกใจ
+[2025-11-15 07:21:35] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-15 07:29:31] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-15 07:41:45] Commit: ฟิลเตอร์ของหน้า Map
+[2025-11-15 09:13:19] Commit: เเก้ตารางพพื้นที่ใช้สอยให้ตรง
+[2025-11-15 10:06:17] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-15 11:58:29] Commit: บัค1
+[2025-11-15 13:51:56] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+
+# Conflicts:
+#	app/dashboard/account/page.tsx
+#	components/property/property-card.tsx
+[2025-11-15 14:12:23] Commit: แก้ error property-card
+[2025-11-15 14:50:27] Commit: เเก้ส่วนเช่าเเเล้วเละขายเเล้วให้มันเบลอ
+[2025-11-15 15:00:28] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-15 15:12:30] Commit: เเก้นิดหน่อย
+[2025-11-15 17:09:52] Commit: หน้าproperty ขยายรูปได้
+[2025-11-15 17:19:07] Commit: topbar
+[2025-11-15 17:32:00] Commit: แก้ฟิลเตอร์ขาย/เช่าบังส่วนอื่น
+[2025-11-15 18:24:08] Commit: การ์ดหมดอายุ
+[2025-11-16 07:39:40] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-16 17:36:17] Commit: 17-11-2568-0.
+
+ลบและเพิ่มsidebarตามแต่ละrole
+[2025-11-17 15:51:17] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-17 16:15:23] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-17 16:48:57] Commit: เเก้ส่วนค้นหา
+[2025-11-17 17:22:08] Commit: เเก้ Erorr in Code
+
+-callback
+   - page
+[2025-11-17 18:44:29] Commit: ฟ
+[2025-11-17 18:51:58] Commit: .DS
+[2025-11-17 19:28:51] Commit: Merge branch 'feature/admin-1'
+[2025-11-18 15:32:06] Commit: แก้บัค
+[2025-11-18 17:29:34] Commit: admin จัดการ user
+[2025-11-18 17:33:55] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-18 17:39:06] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-18 17:57:14] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-18 19:06:50] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-19 20:02:14] Commit: เพลย์เม้นท์
+[2025-11-20 13:47:17] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-20 14:52:50] Commit: 20-11-2568-2
+[2025-11-20 15:30:59] Commit: 20-11-2568-3
+[2025-11-20 17:34:29] Commit: หน้าdashboard
+[2025-11-20 21:36:20] Commit: account
+[2025-11-20 22:07:15] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-21 09:51:43] Commit: s1
+[2025-11-21 10:02:55] Commit: 21/11/2568-1
+[2025-11-21 10:57:24] Commit: listings
+[2025-11-21 11:09:12] Commit: listings agents
+[2025-11-21 11:17:24] Commit: 21-11-2568
+[2025-11-21 11:53:06] Commit: listings -customer
+[2025-11-21 12:01:56] Commit: Cache Invalidation
+[2025-11-22 06:15:25] Commit: add-property
+[2025-11-22 07:43:45] Commit: เเก้ Login
+
+ไม่ต้องส่ง OTP ในกรณีที่ผู้ใช้เข้าสู้ระบบด้วยเบอร์โทร
+[2025-11-22 07:59:26] Commit: listings*เพิ่มระบบสแกนถ่ายจากมือถือ
+[2025-11-22 10:16:44] Commit: Merge branch 'feature/admin-1'
+[2025-11-22 15:18:24] Commit: ระบบ3เดือน
+[2025-11-22 15:45:21] Commit: เเก้กาดสอบถามเกี่ยวกับทรัพย์สิน เเละเพิ่มปุ่มคำร้อง (ขอคืนเงิน)
+
+- เเก้กาดสอบถามเกี่ยวกับทรัพย์สิน ให้มีเบอร์โช้วตามความเหมาะสม
+- เพิ่มปุ่มฟังชั่นคำร้องขอคืนเงิน (ฟังชั่นนี้จะยังไม่สามารถใช้งานได้จริง)
+[2025-11-22 21:15:57] Commit:  ro
+[2025-11-23 08:34:03] Commit: cookie
+[2025-11-23 19:00:57] Commit: ระบบสลับบัญชี
+[2025-11-23 19:06:57] Commit: ระบบสลับบัญชี
+[2025-11-23 19:35:15] Commit: listings
+[2025-11-24 15:52:39] Commit: Mock package
+[2025-11-24 16:14:06] Commit: การ์ดใน Map
+[2025-11-24 16:24:46] Commit: หน้าmap
+[2025-11-24 16:36:48] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-24 17:03:41] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-25 18:32:05] Commit: ธงในแมพ
+[2025-11-25 20:39:18] Commit: สลับบัญชี
+[2025-11-25 21:43:26] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-26 14:18:10] Commit: UI
+[2025-11-26 16:57:47] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+
+# Conflicts:
+#	log.txt
+[2025-11-26 17:01:42] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-26 17:46:17] Commit: packages
+[2025-11-26 19:14:10] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-26 19:35:41] Commit: ระบบจ่ายเงินpackages
+[2025-11-26 20:17:59] Commit: ระบบจ่ายเงิน
+[2025-11-27 18:13:06] Commit: แผนที่แมพ
+[2025-11-27 18:55:33] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-28 08:21:09] Commit: 28-11-2658-1
+[2025-11-28 08:46:12] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-28 08:56:31] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy
+[2025-11-28 12:12:50] Commit: ลบ log
+[2025-11-28 12:21:13] Commit: ฟอแม็ท
+[2025-11-28 12:22:04] Commit: Merge branch 'main' of https://github.com/tao-Isaman/tedin-easy

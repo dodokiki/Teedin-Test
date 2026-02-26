@@ -1,0 +1,523 @@
+/* ✅ Optimize Tailwind CSS loading */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Font optimization - ลด CLS (Cumulative Layout Shift) */
+@layer base {
+  body {
+    font-display: swap;
+  }
+}
+
+body {
+  font-family:
+    "Sukhumvit Set", "Sarabun", "Noto Sans Thai", Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* ✅ Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* ✅ Text truncation utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* ✅ Optimized transitions */
+  .transition-fast {
+    transition-duration: 150ms;
+  }
+
+  .transition-medium {
+    transition-duration: 300ms;
+  }
+
+  .transition-slow {
+    transition-duration: 500ms;
+  }
+
+  /* Custom blue shades for theme consistency */
+  .bg-blue-25 {
+    background-color: #f8faff;
+  }
+
+  .via-blue-25 {
+    --tw-gradient-to: rgb(248 250 255) var(--tw-gradient-to-position);
+    --tw-gradient-stops:
+      var(--tw-gradient-from), #f8faff var(--tw-gradient-via-position),
+      var(--tw-gradient-to);
+  }
+
+  /* Force consistent input/textarea styling across all browsers and themes */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  textarea,
+  select {
+    background-color: white !important;
+    color: #374151 !important; /* gray-700 */
+    border-color: #d1d5db !important; /* gray-300 */
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  textarea:focus,
+  select:focus {
+    background-color: white !important;
+    color: #374151 !important; /* gray-700 */
+    border-color: #3b82f6 !important; /* blue-500 */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af !important; /* gray-400 */
+    opacity: 1 !important;
+  }
+
+  /* Override any dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    textarea,
+    select {
+      background-color: white !important;
+      color: #374151 !important;
+      border-color: #d1d5db !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9ca3af !important;
+    }
+  }
+
+  /* Utility classes for consistent form styling */
+  .form-input-consistent {
+    background-color: white !important;
+    color: #374151 !important;
+    border-color: #d1d5db !important;
+  }
+
+  .form-input-consistent:focus {
+    background-color: white !important;
+    color: #374151 !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+  }
+
+  .form-input-consistent::placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;
+  }
+
+  /* Force override for any CSS framework conflicts */
+  .force-white-bg {
+    background-color: white !important;
+    color: #1f2937 !important;
+  }
+
+  .force-white-bg:focus {
+    background-color: white !important;
+    color: #1f2937 !important;
+  }
+
+  .font-thai {
+    font-family:
+      "Sukhumvit Set", "Sarabun", "Noto Sans Thai", Arial, sans-serif;
+  }
+
+  .font-sukhumvit {
+    font-family: "Sukhumvit Set", sans-serif;
+  }
+
+  .font-ibm-plex-sans-thai {
+    font-family: "IBM Plex Sans Thai", sans-serif !important;
+  }
+
+  /* Custom styles for UserAvatar */
+  .user-avatar-initials {
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .user-avatar-gradient {
+    background-attachment: fixed;
+  }
+
+  /* Glow Effect for Navigation */
+  .hover\:text-shadow-glow:hover {
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+  }
+
+  /* Fade-in animation for Agent button */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  /* Visibility utilities */
+  .visibility-visible {
+    visibility: visible;
+  }
+
+  .visibility-hidden {
+    visibility: hidden;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 214 100% 97%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 214 100% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 214 100% 45%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 214 100% 45%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 214 100% 45%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 214 100% 50%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 214 100% 50%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 214 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 214 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations for toast notifications */
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animations for step transitions */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-left {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-out-left {
+    animation: slide-out-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-out-right {
+    animation: slide-out-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  /* Scrollbar hiding utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+  }
+
+  /* Disable scrolling utilities */
+  .no-scroll {
+    overflow: hidden !important;
+  }
+
+  .no-scroll-x {
+    overflow-x: hidden !important;
+  }
+
+  .no-scroll-y {
+    overflow-y: hidden !important;
+  }
+
+  /* Dashboard specific no-scroll */
+  .dashboard-no-scroll {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .dashboard-content {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar style for light theme (overlay/ซ้อน) */
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+  position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.6);
+  /* เทาโปร่งใส */
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Custom scrollbar for dark mode (overlay/ซ้อน) */
+.dark ::-webkit-scrollbar {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(55, 65, 81, 0.7);
+  border: 2px solid transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Firefox overlay scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(55, 65, 81, 0.7) transparent;
+}
+
+/* Enhanced dropdown styling */
+select {
+  transition: all 0.2s ease-in-out;
+}
+
+select:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Dropdown arrow animation */
+select:focus + div svg {
+  transform: rotate(180deg);
+}

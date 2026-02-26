@@ -1,0 +1,110 @@
+@@ -8,26 +8,28 @@ import { useAuth } from "@/contexts/auth-context";
+import { Eye, EyeOff, X } from "lucide-react";
+import { useEffect, useState } from "react";
+
+interface LoginDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onLoginSuccess?: () => void;
+  showSuccessModal?: boolean;
+  onSwitchToRegister?: () => void;
+  isAddAccountMode?: boolean;
+}
+
+export function LoginDrawer({
+  isOpen,
+  onClose,
+  onLoginSuccess,
+  showSuccessModal = false,
+  onSwitchToRegister,
+  isAddAccountMode = false,
+}: LoginDrawerProps) {
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isForgotOpen, setIsForgotOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+@@ -172,49 +174,58 @@ export function LoginDrawer({
+      setIsLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* Overlay */}
+      {isOpen && !isAddAccountMode && (
+        <div
+          className="fixed inset-0 bg-black/50 z-50 transition-opacity"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Drawer */}
+      <div
+        className={`fixed inset-y-0 right-0 w-full sm:w-[450px] bg-gradient-to-br from-white via-gray-50 to-blue-50 backdrop-blur-sm z-[60] transform transition-all duration-300 ease-in-out shadow-2xl rounded-l-2xl
+        className={`${
+          isAddAccountMode
+            ? "absolute inset-0 w-full bg-white z-10"
+            : `fixed inset-y-0 right-0 w-full sm:w-[450px] bg-gradient-to-br from-white via-gray-50 to-blue-50 backdrop-blur-sm z-[60] shadow-2xl rounded-l-2xl`
+        } transform transition-all duration-300 ease-in-out
+          ${isOpen && isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}
+        style={{ marginTop: 0, paddingTop: 0 }}
+      >
+        <div className="h-full flex flex-col p-6 overflow-y-auto">
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-white/60 backdrop-blur-sm transition-all duration-200"
+              disabled={isLoading}
+              title="Close"
+            >
+              <X size={24} className="text-gray-600" />
+            </button>
+          </div>
+
+          <div className="flex-1 mt-4">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-black mb-2">
+                {isAddAccountMode ? "เพิ่มบัญชีใหม่" : "ล็อกอิน เข้าสู่ระบบ"}
+              </h2>
+              {isAddAccountMode && (
+                <p className="text-gray-500 text-sm">
+                  เชื่อมต่อบัญชีอื่นเพื่อสลับการใช้งานได้ง่ายขึ้น
+                </p>
+              )}
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="login-email-or-phone"
+                    className="text-gray-700 text-sm font-medium"
+                  >
+@@ -303,18 +314,20 @@ export function LoginDrawer({
+                  type="submit"
+                  className="w-full h-10 text-base bg-[#007AFF] hover:bg-[#0066d6] text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 font-semibold focus-visible:ring-2 focus-visible:ring-[#007AFF] focus-visible:ring-offset-2"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      กำลังดำเนินการ...
+                    </div>
+                  ) : isAddAccountMode ? (
+                    "เพิ่มบัญชี"
+                  ) : (
+                    "ยืนยัน"
+                  )}
+                </Button>
+              </div>
+            </form>
+
+            <div className="relative flex items-center my-4">
+              <div className="flex-grow border-t border-gray-200"></div>

@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+dist
+build
+*.log
+*.lock
+pnpm-lock.yaml
+package-lock.json
+.env*
+.prettierrc
+public/
+*.min.js
+*.min.css
