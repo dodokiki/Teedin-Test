@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "./scripts/strip-next-version.sh",
+    "postbuild": "sh scripts/strip-next-version.sh",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",

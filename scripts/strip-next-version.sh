@@ -20,7 +20,15 @@ if [ -z "$FILES" ]; then
   exit 0
 fi
 
-# Replace version with empty string (macOS compatible sed)
-echo "$FILES" | xargs sed -i '' "s/$NEXT_VERSION//g"
+# Replace version with empty string (portable: macOS vs Linux/GNU sed)
+replace_version() {
+  for f; do
+    case "$(uname -s)" in
+      Darwin) sed -i '' "s/$NEXT_VERSION//g" "$f";;
+      *)      sed -i "s/$NEXT_VERSION//g" "$f";;
+    esac
+  done
+}
+echo "$FILES" | while read -r f; do [ -n "$f" ] && replace_version "$f"; done
 
 echo "[postbuild] ✅ Removed Next.js version $NEXT_VERSION from $(echo "$FILES" | wc -l) files."
