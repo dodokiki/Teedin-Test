@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/language-context";
+import { getGoogleMapsApiKey } from "@/lib/google-maps";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type MapLocation = {
@@ -104,6 +105,10 @@ export default function MapPicker({
 
   useEffect(() => {
     const loadGoogleMaps = () => {
+      if (!getGoogleMapsApiKey()) {
+        console.warn("Google Maps API key not set. Set NEXT_PUBLIC_GOOGLE_API_KEY or NEXT_PUBLIC_GOOGLE_MAPS_API_KEY.");
+        return;
+      }
       if (window.google?.maps) {
         setMapLoaded(true);
         return;
@@ -121,7 +126,7 @@ export default function MapPicker({
       }
 
       const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places,geometry`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${getGoogleMapsApiKey()}&libraries=places,geometry`;
       script.async = true;
       script.setAttribute("data-google-maps", "true");
       script.onload = () => setMapLoaded(true);

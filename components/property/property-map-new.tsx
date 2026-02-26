@@ -10,11 +10,21 @@ import {
   InfoWindow,
   useMap,
 } from "@vis.gl/react-google-maps";
+import { getGoogleMapsApiKey } from "@/lib/google-maps";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const VECTOR_MAP_ID = "d1884df1414e340e6b3a90fd";
+// Map ID ต้องใช้เสมอเมื่อมี AdvancedMarker (ป้ายราคา) — ถ้าไม่ส่งจะเกิด error "map was initialized without a valid map ID"
+// หมายเหตุ: บางเครื่องอาจเห็น console "Attempted to load Vector Map, but failed. Falling back to Raster" — เป็นการ fallback ปกติ แผนที่ยังใช้ได้
+const DEFAULT_VECTOR_MAP_ID = "d1884df1414e340e6b3a90fd";
+function getMapId(): string {
+  if (typeof process === "undefined") return DEFAULT_VECTOR_MAP_ID;
+  const envMapId =
+    process.env.NEXT_PUBLIC_GOOGLE_MAP_ID ||
+    process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID;
+  return (envMapId && envMapId.trim()) || DEFAULT_VECTOR_MAP_ID;
+}
 
 function isWebGLSupported(): boolean {
   if (typeof window === "undefined") return false;
@@ -598,11 +608,8 @@ export default function PropertyMapNew({
     : { lat: center[0], lng: center[1] };
   const initialZoom = targetPosition ? targetPosition.zoom : zoom;
 
-  const useVectorMap = useMemo(
-    () => typeof window !== "undefined" && isWebGLSupported(),
-    []
-  );
-
+  const googleMapsApiKey = getGoogleMapsApiKey();
+  const mapId = getMapId();
   const validProperties = properties.filter(
     prop => prop.latitude && prop.longitude
   );
@@ -674,6 +681,17 @@ export default function PropertyMapNew({
     setShowBalloon(currentZoom >= 13);
   }, [currentZoom]);
 
+  if (!googleMapsApiKey) {
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-700 p-6 text-center">
+        <p className="font-medium mb-2">ไม่สามารถโหลดแผนที่ได้</p>
+        <p className="text-sm max-w-md">
+          กรุณาตั้งค่า Google Maps API Key (NEXT_PUBLIC_GOOGLE_API_KEY หรือ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) ใน .env.local หรือใน Vercel Environment Variables และเปิดใช้ Maps JavaScript API รวมถึง Map Tiles API (สำหรับป้ายราคาบนแผนที่)
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={rootRef}
@@ -693,9 +711,9 @@ export default function PropertyMapNew({
           display: none !important; /* Hide the default google maps tail */
         }
       `}</style>
-      <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY || ""}>
+      <APIProvider apiKey={googleMapsApiKey}>
         <GoogleMap
-          {...(useVectorMap ? { mapId: VECTOR_MAP_ID } : {})}
+          mapId={mapId}
           defaultCenter={initialCenter}
           defaultZoom={initialZoom}
           gestureHandling="greedy"

@@ -20,8 +20,9 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-# Google Maps API Configuration
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+# Google Maps API Configuration (ใช้อย่างใดอย่างหนึ่ง)
+NEXT_PUBLIC_GOOGLE_API_KEY=your_google_maps_api_key_here
+# หรือ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 # Twilio Configuration (Optional - for SMS OTP)
 TWILIO_ACCOUNT_SID=your_twilio_account_sid
@@ -34,14 +35,13 @@ TWILIO_PHONE_NUMBER=your_twilio_phone_number
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select an existing one
-3. Enable the Google Maps JavaScript API
-4. Create an API key
-5. Add the API key to your `.env.local` file (as shown above)
+3. Enable **Maps JavaScript API** และ **Map Tiles API** (สำหรับป้ายราคาบนแผนที่)
+4. สร้าง Map ID (Vector map) ใน Maps → Map Management ถ้าต้องการให้แสดงป้ายราคา (ไม่ใช่หมุดแดง)
+5. Create an API key
+6. Add the API key to your `.env.local` as `NEXT_PUBLIC_GOOGLE_API_KEY` or `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`
+7. บน Vercel: ตั้งค่า Environment Variable เดียวกันให้กับโปรเจกต์
 
-**Note:** Make sure to restrict your API key to prevent unauthorized usage. You can restrict it by:
-
-- Application restrictions (HTTP referrers)
-- API restrictions (only enable Maps JavaScript API)
+**Note:** Make sure to restrict your API key (HTTP referrers สำหรับโดเมนของคุณ เช่น `teedin-test.vercel.app`). ถ้าไม่มี API key หรือ Map ID ไม่ตรงกับโปรเจกต์ แผนที่อาจโหลดไม่ขึ้นหรือแสดงเป็นหมุดแดง
 
 ### Database Setup
 

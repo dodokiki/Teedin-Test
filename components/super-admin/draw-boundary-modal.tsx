@@ -7,6 +7,7 @@ import {
   AdvancedMarker,
   useMap,
 } from "@vis.gl/react-google-maps";
+import { getGoogleMapsApiKey } from "@/lib/google-maps";
 import React, { useEffect, useMemo, useState, useRef } from "react";
 
 function isWebGLSupported(): boolean {
@@ -289,7 +290,7 @@ export default function DrawBoundaryModal({
 
         {/* Map */}
         <div className="flex-1 relative min-h-0">
-          <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY || ""}>
+          <APIProvider apiKey={getGoogleMapsApiKey()}>
             <GoogleMap
               {...(useMemo(
                 () =>
